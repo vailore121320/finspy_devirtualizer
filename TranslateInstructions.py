@@ -203,7 +203,7 @@ def parse_bytecode(bytecode):
 # Creates a new segment that will hold the translated instructions
 def make_devirt_code_segment(segment_size):
     seg = idaapi.segment_t()
-    seg.start_ea = align_to_page_size(ida_ida.inf_get_max_ea()) # The start address of our segment, which will be located after the last section in our program
+    seg.start_ea = align_to_page_size(idaapi.get_inf_structure().max_ea) # The start address of our segment, which will be located after the last section in our program
     seg.end_ea = align_to_page_size(seg.start_ea + segment_size)
     seg.bitness = 1 # "1" means 32-bit
     seg.perm = idaapi.SEGPERM_EXEC | idaapi.SEGPERM_WRITE | idaapi.SEGPERM_READ # RWX permissions
